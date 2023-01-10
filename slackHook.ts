@@ -113,11 +113,11 @@ export class SlackHook extends Transport {
     this.axiosInstance
         .post(this.opts.webhookUrl, payload)
         .then((response) => {
-          // this.emit('logged', info);
+          console.log('logged', info);
           callback();
         })
         .catch((err) => {
-          // this.emit('error', err);
+          console.error('error', err);
           callback();
         });
   }
