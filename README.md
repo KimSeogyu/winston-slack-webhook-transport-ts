@@ -115,14 +115,14 @@ include `text` when possible in these cases.
 import * as winston from 'winston';
 import httpsProxyAgent from 'https-proxy-agent';
 import {
-  Index,
+  SlackTransport,
   TransformableInfo,
 } from 'winston-slack-webhook-transport-ts';
 
 const logger = winston.createLogger({
     level: "info",
     transports: [
-        new Index({
+        new SlackTransport({
             webhookUrl: "https://hooks.slack.com/services/xxx/xxx/xxx",
             formatter: info => {
                 return {
