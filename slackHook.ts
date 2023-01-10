@@ -18,7 +18,7 @@ export interface SlackMessage {
 
 export interface SlackHookOptions {
   /**
-   *
+   * An HttpAgent Instance. If you use httpsProxyAgent (import httpsProxyAgent from 'https-proxy-agent'), It will automatically enable proxy setting;
    */
   agent?: any
   /**
