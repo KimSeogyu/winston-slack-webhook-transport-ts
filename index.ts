@@ -16,7 +16,7 @@ export interface SlackMessage {
   channel?: string
 }
 
-export interface SlackHookOptions {
+export interface SlackTransportOptions {
   /**
    * An HttpAgent Instance. If you use httpsProxyAgent (import httpsProxyAgent from 'https-proxy-agent'), It will automatically enable proxy setting;
    */
@@ -73,10 +73,10 @@ export interface SlackHookOptions {
 export class SlackTransport extends Transport {
   private axiosInstance: AxiosInstance;
 
-  constructor(private opts: SlackHookOptions) {
+  constructor(private opts: SlackTransportOptions) {
     super(opts);
 
-    const config: Partial<SlackHookOptions> = {};
+    const config: Partial<SlackTransportOptions> = {};
 
     if (opts.agent) config.agent = opts.agent;
     if (opts.proxy) config.proxy = opts.proxy;

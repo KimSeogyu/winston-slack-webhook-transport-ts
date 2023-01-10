@@ -1,10 +1,10 @@
 import {jest} from '@jest/globals'
 import mockAxios from "../__mocks__/axios.mock.js";
-import {SlackTransport, SlackHookOptions} from "../index.js";
+import {SlackTransport, SlackTransportOptions} from "../index.js";
 
 describe ("Standard options", () => {
     const fakeFormatter = jest.fn((info: any) => ({ text: `Custom message: ${info.message}` }));
-    const fakeOpts: SlackHookOptions = {
+    const fakeOpts: SlackTransportOptions = {
         name: 'totally-fake-slackhook',
         formatter: fakeFormatter,
         webhookUrl: 'https://totally.fake.url',
@@ -187,7 +187,7 @@ describe ("Custom options with custom formatter", () => {
 
 describe ("Standard options with formatter that filters out all messages", () => {
     const fakeFormatter = jest.fn((info): false => false);
-    const fakeOpts: SlackHookOptions = {
+    const fakeOpts: SlackTransportOptions = {
         name: 'totally-fake-slackhook',
         formatter: fakeFormatter,
         webhookUrl: 'https://totally.fake.url',
