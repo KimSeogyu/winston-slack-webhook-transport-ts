@@ -21,30 +21,47 @@ npm install winston winston-slack-webhook-transport-ts
 ### Set up with transports
 
 ```javascript
-const winston = require("winston");
-const SlackHook = require("winston-slack-webhook-transport-ts");
+import {
+  utilities as nestWinstonModuleUtilities,
+  WinstonModule,
+} from 'nest-winston';
+import * as winston from 'winston';
+import httpsProxyAgent from 'https-proxy-agent';
+import {
+  SlackHook,
+  TransformableInfo,
+} from 'winston-slack-webhook-transport-ts';
 
 const logger = winston.createLogger({
     level: "info",
     transports: [
-        new SlackHook({
-            webhookUrl: "https://hooks.slack.com/services/xxx/xxx/xxx"
-        })
+      new SlackHook({
+        level: 'error',
+        webhookUrl: "slack webhook url",
+        agent: httpsProxyAgent("sample agent url"),
+        formatter: (data: TransformableInfo) => {
+          return {
+            blocks: [
+              {
+                type: 'section',
+                text: {
+                  type: 'mrkdwn',
+                  text:
+                          '```' +
+                          `[${NODE_ENV.toUpperCase()}][${data.level.toUpperCase()}] ${
+                                  data.message
+                          }` +
+                          '```',
+                },
+              },
+            ],
+          };
+        },
+      }),
     ]
 });
 
 logger.info("This should now appear on Slack");
-```
-
-### Set up by adding
-
-```javascript
-const winston = require("winston");
-const SlackHook = require("winston-slack-webhook-transport-ts");
-
-const logger = winston.createLogger({});
-
-logger.add(new SlackHook({webhookUrl: "https://hooks.slack.com/services/xxx/xxx/xxx"}));
 ```
 
 ### Options
@@ -76,6 +93,8 @@ logger.add(new SlackHook({webhookUrl: "https://hooks.slack.com/services/xxx/xxx/
   default icon. (Interchangeable with `iconUrl`) (Default: `undefined`)
 * `iconUrl` - An icon image URL string to use in place of the default icon. Interchangeable with `iconEmoji`. (
   Default: `undefined`)
+* `agent` - An HttpAgent Instance. If you use httpsProxyAgent with`import httpsProxyAgent from 'https-proxy-agent'`, It will automatically enable proxy setting;
+
 
 ### Message formatting
 
@@ -96,9 +115,13 @@ Note that if you're using Block Kit using either the `attachments` or `blocks` k
 as a fallback for surfaces that do not support Block Kit, such as push notifications. It is recommended to
 include `text` when possible in these cases.
 
-```javascript
-const winston = require("winston");
-const SlackHook = require("winston-slack-webhook-transport-ts");
+```typescript
+import * as winston from 'winston';
+import httpsProxyAgent from 'https-proxy-agent';
+import {
+  SlackHook,
+  TransformableInfo,
+} from 'winston-slack-webhook-transport-ts';
 
 const logger = winston.createLogger({
     level: "info",
