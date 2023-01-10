@@ -1,4 +1,4 @@
-import axios, {Axios, AxiosInstance} from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import Transport from 'winston-transport';
 export interface TransformableInfo {
   level: string;
@@ -71,17 +71,17 @@ export interface SlackHookOptions {
 }
 
 export class SlackHook extends Transport {
-  private axiosInstance: Axios;
+  private axiosInstance: AxiosInstance;
 
   constructor(private opts: SlackHookOptions) {
     super(opts);
 
-    this.axiosInstance = new Axios({
-      proxy: opts.proxy || undefined,
-      httpAgent: opts.agent,
-      httpsAgent: opts.agent,
-    });
+    const config: Partial<SlackHookOptions> = {};
 
+    if (opts.agent) config.agent = opts.agent;
+    if (opts.proxy) config.proxy = opts.proxy;
+
+    this.axiosInstance = axios.create(config);
   }
 
   log(info, callback) {
@@ -113,11 +113,10 @@ export class SlackHook extends Transport {
     this.axiosInstance
         .post(this.opts.webhookUrl, payload)
         .then((response) => {
-          console.log('logged', info);
           callback();
         })
         .catch((err) => {
-          console.error('error', err);
+          console.error('webhook error', err);
           callback();
         });
   }
