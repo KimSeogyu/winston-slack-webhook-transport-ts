@@ -1,10 +1,12 @@
-import mockAxios from "../__mocks__/axios";
-import SlackHook from "../slackHook";
+import {jest} from '@jest/globals'
+import mockAxios from "../__mocks__/axios.mock.js";
+import {SlackHook, SlackHookOptions} from "../slackHook.js";
 
 describe ("Standard options", () => {
-    const fakeOpts = {
+    const fakeFormatter = jest.fn((info: any) => ({ text: `Custom message: ${info.message}` }));
+    const fakeOpts: SlackHookOptions = {
         name: 'totally-fake-slackhook',
-        formatter: 'totally-fake-formatter',
+        formatter: fakeFormatter,
         webhookUrl: 'https://totally.fake.url',
         channel: '#totally-fake-channel',
         username: 'totally-fake-username',
@@ -65,7 +67,7 @@ describe ("Standard options", () => {
 })
 
 describe ("Standard options with custom formatter", () => {
-    const fakeFormatter = jest.fn((info) => ({ text: `Custom message: ${info.message}` }));
+    const fakeFormatter = jest.fn((info: any) => ({ text: `Custom message: ${info.message}` }));
     const fakeOpts = {
         name: 'totally-fake-slackhook',
         formatter: fakeFormatter,
@@ -132,7 +134,7 @@ describe ("Standard options with custom formatter", () => {
 })
 
 describe ("Custom options with custom formatter", () => {
-    const fakeFormatter = jest.fn((info) => ({ text: `Custom message: ${info.message}`, icon_url: "a", username: "b", icon_emoji: "c", channel:"d"  }));
+    const fakeFormatter = jest.fn((info:any) => ({ text: `Custom message: ${info.message}`, icon_url: "a", username: "b", icon_emoji: "c", channel:"d"  }));
     const fakeOpts = {
         name: 'totally-fake-slackhook',
         formatter: fakeFormatter,
@@ -184,8 +186,8 @@ describe ("Custom options with custom formatter", () => {
 })
 
 describe ("Standard options with formatter that filters out all messages", () => {
-    const fakeFormatter = jest.fn((info) => false);
-    const fakeOpts = {
+    const fakeFormatter = jest.fn((info): false => false);
+    const fakeOpts: SlackHookOptions = {
         name: 'totally-fake-slackhook',
         formatter: fakeFormatter,
         webhookUrl: 'https://totally.fake.url',

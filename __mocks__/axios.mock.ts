@@ -1,3 +1,5 @@
+import {jest} from '@jest/globals'
+
 export default {
     create: jest.fn(() => {
         return {
