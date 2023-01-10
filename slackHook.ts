@@ -1,30 +1,26 @@
-import axios, { AxiosInstance } from 'axios';
-
+import axios, {Axios, AxiosInstance} from 'axios';
 import Transport from 'winston-transport';
-
 export interface TransformableInfo {
   level: string;
   message: string;
-
   [key: string]: any;
 }
 
 export interface SlackMessage {
-  text?: string;
-  attachments?: any[];
-  blocks?: any[];
-  icon_emoji?: string;
-  username?: string;
-  icon_url?: string;
-  channel?: string;
+  text?: string
+  attachments?: any[]
+  blocks?: any[]
+  icon_emoji?: string
+  username?: string
+  icon_url?: string
+  channel?: string
 }
 
 export interface SlackHookOptions {
   /**
-   *  If you add httpsProxyAgent (import httpsProxyAgent from 'https-proxy-agent') to agent,
-   *  It will enable proxy setting
+   *
    */
-  agent?: any;
+  agent?: any
   /**
    * Slack incoming webhook URL.
    *
@@ -75,17 +71,17 @@ export interface SlackHookOptions {
 }
 
 export class SlackHook extends Transport {
-  private axiosInstance: AxiosInstance;
+  private axiosInstance: Axios;
 
   constructor(private opts: SlackHookOptions) {
     super(opts);
 
-    const config: Partial<SlackHookOptions> = {};
+    this.axiosInstance = new Axios({
+      proxy: opts.proxy || undefined,
+      httpAgent: opts.agent,
+      httpsAgent: opts.agent,
+    });
 
-    if (opts.agent) config.agent = opts.agent;
-    if (opts.proxy) config.proxy = opts.proxy;
-
-    this.axiosInstance = axios.create(config);
   }
 
   log(info, callback) {
@@ -117,11 +113,11 @@ export class SlackHook extends Transport {
     this.axiosInstance
         .post(this.opts.webhookUrl, payload)
         .then((response) => {
-          this.emit('logged', info);
+          // this.emit('logged', info);
           callback();
         })
         .catch((err) => {
-          this.emit('error', err);
+          // this.emit('error', err);
           callback();
         });
   }

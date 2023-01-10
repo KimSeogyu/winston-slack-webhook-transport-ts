@@ -20,11 +20,7 @@ npm install winston winston-slack-webhook-transport-ts
 
 ### Set up with transports
 
-```javascript
-import {
-  utilities as nestWinstonModuleUtilities,
-  WinstonModule,
-} from 'nest-winston';
+```typescript
 import * as winston from 'winston';
 import httpsProxyAgent from 'https-proxy-agent';
 import {

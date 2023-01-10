@@ -21,6 +21,8 @@
   "homepage": "https://github.com/SeogyuGim/winston-slack-webhook-transport-ts#readme",
   "files": [
     "slackHook.ts",
+    "dist/slackHook.js",
+    "dist/slackHook.d.ts",
     "README.md",
     "LICENSE",
     "CHANGELOG.md"
