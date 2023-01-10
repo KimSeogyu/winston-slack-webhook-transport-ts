@@ -113,15 +113,9 @@ export class SlackTransport extends Transport {
     this.axiosInstance
         .post(this.opts.webhookUrl, payload)
         .then((response) => {
-          setImmediate(() => {
-            this.emit('logged', info);
-          });
           callback();
         })
         .catch((err) => {
-          setImmediate(() => {
-            this.emit('error', err);
-          });
           callback();
         });
   }
