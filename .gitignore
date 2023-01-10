@@ -1,3 +1,4 @@
 .idea
 dist/*.map
 dist/tsconfig.tsbuildinfo
+node_modules
