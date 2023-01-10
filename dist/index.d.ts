@@ -28,7 +28,7 @@ export interface SlackHookOptions {
     iconEmoji?: string;
     iconUrl?: string;
 }
-export declare class SlackHook extends Transport {
+export declare class SlackTransport extends Transport {
     private opts;
     private axiosInstance;
     constructor(opts: SlackHookOptions);

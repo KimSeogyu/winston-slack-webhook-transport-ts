@@ -70,7 +70,7 @@ export interface SlackHookOptions {
   iconUrl?: string;
 }
 
-export class SlackHook extends Transport {
+export class SlackTransport extends Transport {
   private axiosInstance: AxiosInstance;
 
   constructor(private opts: SlackHookOptions) {
@@ -113,10 +113,15 @@ export class SlackHook extends Transport {
     this.axiosInstance
         .post(this.opts.webhookUrl, payload)
         .then((response) => {
+          setImmediate(() => {
+            this.emit('logged', info);
+          });
           callback();
         })
         .catch((err) => {
-          console.error('webhook error', err);
+          setImmediate(() => {
+            this.emit('error', err);
+          });
           callback();
         });
   }

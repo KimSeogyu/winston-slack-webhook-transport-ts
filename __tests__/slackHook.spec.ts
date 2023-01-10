@@ -1,6 +1,6 @@
 import {jest} from '@jest/globals'
 import mockAxios from "../__mocks__/axios.mock.js";
-import {SlackHook, SlackHookOptions} from "../slackHook.js";
+import {SlackTransport, SlackHookOptions} from "../index.js";
 
 describe ("Standard options", () => {
     const fakeFormatter = jest.fn((info: any) => ({ text: `Custom message: ${info.message}` }));
@@ -21,7 +21,7 @@ describe ("Standard options", () => {
 
     beforeAll(() => {
         jest.clearAllMocks();
-        fakeSlackHook = new SlackHook(fakeOpts);
+        fakeSlackHook = new SlackTransport(fakeOpts);
     });
 
     beforeEach(() => {
@@ -29,7 +29,7 @@ describe ("Standard options", () => {
     })
 
     it("checks if parameters are correct", () => {
-        expect(fakeSlackHook).toBeInstanceOf(SlackHook);
+        expect(fakeSlackHook).toBeInstanceOf(SlackTransport);
         expect(fakeSlackHook.name).toEqual(fakeOpts.name);
         expect(fakeSlackHook.formatter).toEqual(fakeOpts.formatter);
         expect(fakeSlackHook.webhookUrl).toEqual(fakeOpts.webhookUrl);
@@ -85,7 +85,7 @@ describe ("Standard options with custom formatter", () => {
 
     beforeAll(() => {
         jest.clearAllMocks();
-        fakeSlackHook = new SlackHook(fakeOpts);
+        fakeSlackHook = new SlackTransport(fakeOpts);
     });
 
     beforeEach(() => {
@@ -93,7 +93,7 @@ describe ("Standard options with custom formatter", () => {
     })
 
     it("checks if parameters are correct", () => {
-        expect(fakeSlackHook).toBeInstanceOf(SlackHook);
+        expect(fakeSlackHook).toBeInstanceOf(SlackTransport);
         expect(fakeSlackHook.name).toEqual(fakeOpts.name);
         expect(fakeSlackHook.formatter).toEqual(fakeOpts.formatter);
         expect(fakeSlackHook.webhookUrl).toEqual(fakeOpts.webhookUrl);
@@ -152,7 +152,7 @@ describe ("Custom options with custom formatter", () => {
 
     beforeAll(() => {
         jest.clearAllMocks();
-        fakeSlackHook = new SlackHook(fakeOpts);
+        fakeSlackHook = new SlackTransport(fakeOpts);
     });
 
     beforeEach(() => {
@@ -204,7 +204,7 @@ describe ("Standard options with formatter that filters out all messages", () =>
 
     beforeAll(() => {
         jest.clearAllMocks();
-        fakeSlackHook = new SlackHook(fakeOpts);
+        fakeSlackHook = new SlackTransport(fakeOpts);
     });
 
     beforeEach(() => {
@@ -212,7 +212,7 @@ describe ("Standard options with formatter that filters out all messages", () =>
     })
 
     it("checks if parameters are correct", () => {
-        expect(fakeSlackHook).toBeInstanceOf(SlackHook);
+        expect(fakeSlackHook).toBeInstanceOf(SlackTransport);
         expect(fakeSlackHook.name).toEqual(fakeOpts.name);
         expect(fakeSlackHook.formatter).toEqual(fakeOpts.formatter);
         expect(fakeSlackHook.webhookUrl).toEqual(fakeOpts.webhookUrl);

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Transport from 'winston-transport';
-export class SlackHook extends Transport {
+export class SlackTransport extends Transport {
     opts;
     axiosInstance;
     constructor(opts) {
@@ -46,4 +46,4 @@ export class SlackHook extends Transport {
         });
     }
 }
-//# sourceMappingURL=slackHook.js.map
+//# sourceMappingURL=index.js.map

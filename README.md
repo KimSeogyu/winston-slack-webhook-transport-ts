@@ -24,14 +24,14 @@ npm install winston winston-slack-webhook-transport-ts
 import * as winston from 'winston';
 import httpsProxyAgent from 'https-proxy-agent';
 import {
-  SlackHook,
+  Index,
   TransformableInfo,
 } from 'winston-slack-webhook-transport-ts';
 
 const logger = winston.createLogger({
     level: "info",
     transports: [
-      new SlackHook({
+      new Index({
         level: 'error',
         webhookUrl: "slack webhook url",
         agent: httpsProxyAgent("sample agent url"),
@@ -115,14 +115,14 @@ include `text` when possible in these cases.
 import * as winston from 'winston';
 import httpsProxyAgent from 'https-proxy-agent';
 import {
-  SlackHook,
+  Index,
   TransformableInfo,
 } from 'winston-slack-webhook-transport-ts';
 
 const logger = winston.createLogger({
     level: "info",
     transports: [
-        new SlackHook({
+        new Index({
             webhookUrl: "https://hooks.slack.com/services/xxx/xxx/xxx",
             formatter: info => {
                 return {
