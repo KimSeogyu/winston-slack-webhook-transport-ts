@@ -1,5 +1,5 @@
 import {jest} from '@jest/globals'
-import mockAxios from "../__mocks__/axios.mock.js";
+import mockAxios from "./mocks/axios.mock.js";
 import {SlackTransport, SlackTransportOptions} from "../index.js";
 
 describe ("Standard options", () => {

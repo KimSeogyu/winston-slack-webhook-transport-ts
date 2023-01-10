@@ -20,6 +20,8 @@
     "allowJs": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "types": ["jest", "node"],
-  }
+    "types": ["jest", "node"]
+  },
+  "include": ["index.ts"],
+  "exclude": ["test", "dist"]
 }
