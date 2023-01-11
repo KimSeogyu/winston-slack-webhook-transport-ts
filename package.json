@@ -1,6 +1,6 @@
 {
   "name": "winston-slack-webhook-transport-ts",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A Slack transport for Winston 3 that logs to a channel via webhooks. With enabling inject Proxy Agent",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,8 +14,8 @@
   "exports": {
     ".": {
       "require": {
-        "types": "./cjs/index.d.ts",
-        "default": "./cjs/index.js"
+        "types": "./cjs/index.d.cts",
+        "default": "./cjs/index.cjs"
       },
       "import": {
         "types": "./esm/index.d.ts",
@@ -34,8 +34,8 @@
   },
   "homepage": "https://github.com/SeogyuGim/winston-slack-webhook-transport-ts#readme",
   "files": [
-    "cjs/index.js",
-    "cjs/index.d.ts",
+    "cjs/index.cjs",
+    "cjs/index.d.cts",
     "esm/index.js",
     "esm/index.d.ts",
     "README.md",
