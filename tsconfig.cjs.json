@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "NodeNext",
+    "module": "CommonJS",
     "target": "ESNext",
     "moduleResolution": "NodeNext",
     "esModuleInterop": true,
@@ -10,7 +10,7 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "./cjs",
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
@@ -23,5 +23,5 @@
     "types": ["jest", "node"]
   },
   "include": ["index.ts"],
-  "exclude": ["test", "dist"]
+  "exclude": ["test", "esm", "cjs"]
 }

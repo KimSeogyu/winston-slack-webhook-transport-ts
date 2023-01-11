@@ -1,13 +1,27 @@
 {
   "name": "winston-slack-webhook-transport-ts",
-  "version": "1.1.5",
+  "version": "1.2.0",
   "description": "A Slack transport for Winston 3 that logs to a channel via webhooks. With enabling inject Proxy Agent",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "build": "tsc"
+    "build:esm": "tsc -p tsconfig.mjs.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build": "npm run build:esm && npm run build:cjs"
+  },
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./cjs/index.d.ts",
+        "default": "./cjs/index.js"
+      },
+      "import": {
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.js"
+      }
+    }
   },
   "repository": {
     "type": "git",
@@ -20,11 +34,12 @@
   },
   "homepage": "https://github.com/SeogyuGim/winston-slack-webhook-transport-ts#readme",
   "files": [
-    "dist/index.js",
-    "dist/index.d.ts",
+    "cjs/index.js",
+    "cjs/index.d.ts",
+    "esm/index.js",
+    "esm/index.d.ts",
     "README.md",
-    "LICENSE",
-    "CHANGELOG.md"
+    "LICENSE"
   ],
   "dependencies": {
     "axios": "^1.1.3",

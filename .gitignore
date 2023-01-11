@@ -1,4 +1,4 @@
 .idea
-dist/*.map
-dist/tsconfig.tsbuildinfo
+**/*.map
+**/tsconfig.tsbuildinfo
 node_modules
