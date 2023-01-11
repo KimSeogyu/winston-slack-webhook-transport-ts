@@ -1,6 +1,6 @@
 {
   "name": "winston-slack-webhook-transport-ts",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "A Slack transport for Winston 3 that logs to a channel via webhooks. With enabling inject Proxy Agent",
   "main": "./cjs/index.cjs",
   "types": "./index.d.ts",
